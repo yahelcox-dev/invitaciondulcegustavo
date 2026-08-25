@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Great+Vibes&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/envelop.css">
+    <link rel="stylesheet" href="/public/css/counter.css">
+    <link rel="stylesheet" href="/public/css/timeLine.css">
+    <link rel="stylesheet" href="/public/css/history.css">
+     <link rel="stylesheet" href="/public/css/player.css">
+     
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+
+    
+
+    <title>Mi boda</title>
+  </head>
+  <body>
+    <div id="scene" class="scene scene-border">
+
+        <div class="container image-container envelop-border" id="imageContainer">
+            <div class="w-100 vh-100 d-flex justify-content-center align-items-center overflow-hidden txt-primary flex-column text-center">
+                <h1 class="mb-5 welcome-text main-text animate__animated animate__fadeIn">Dulce<br>&<br>Gustavo</h1>
+
+                <h5 class="mb-4 welcome-text animate__animated animate__fadeIn">Con mucha alegría queremos compartir contigo
+                    el día en que comenzaremos una nueva historia juntos.</h5>
+                    <h6 class="mb-5 welcome-text animate__animated animate__fadeIn">23 · Noviembre · 2026</h6>
+
+                <img
+                    id="mainImage"
+                    src="/public/images/env_0.jpg"
+                    alt="Imagen"
+                    class="img-fluid animate__animated animate__bounceIn mb-5"
+                    
+                />
+            </div>
+        </div>
+
+        <div id="finalContainer"class="container-xxl px-0 w-100 d-flex justify-content-center align-items-center flex-column finalContainer d-none full-border">
+            <div id="top-container" class="d-flex justify-content-center align-items-center bgd-primary">
+                <div id="main-text-container" class="position-absolute text-white text-center d-none">
+                    <h1>Nos casamos</h1>
+                    <h1>Dulce & Gustavo</h1>
+                    <h3>23/11/26</h3>
+                </div>
+            
+            
+                <img
+                    id="mainImage"
+                    src="/public/images/dg_top.png"
+                    alt="Imagen"
+                    class="img-fluid animate__animated animate__fadeIn"
+                    style="max-width: 100%; max-height: 100%; object-fit: contain;"
+                />
+            </div>
+
+            <div class="bgd-primary text-center text-white w-100 d-flex justify-content-center align-items-center flex-column p-5">
+                <h5 class="fst-italic mb-4 animate__animated animate__fadeInLeft reveal">
+                    "A veces lo que empieza como una locura<br>se convierte en lo mejor<br>de tu vida"
+                </h5>
+
+                <h5 class="animate__animated animate__fadeInRight reveal">Después de tantos momentos compartidos,<br>
+                    estamos listos para comenzar un nuevo capítulo.</h5>
+                
+                <i data-lucide="heart" fill="white" class="mt-3 animate__animated animate__fadeIn"></i>
+            </div>
+            <!--player-->
+            <!-- Reproductor de Audio -->
+            <div class="card audio-player-card border-0 shadow-lg mx-auto d-none" style="max-width: 400px;">
+            <div class="card-body p-4 text-center">
+                
+                <!-- Título / Info -->
+                <h6 class="card-subtitle mb-1 text-white-50 text-uppercase tracking-wide small">Música de fondo</h6>
+                <h5 class="card-title fw-bold text-white mb-3 text-primary">Nuestra Canción</h5>
+
+                <!-- Barra de Progreso -->
+                <div class="progress mb-3" style="height: 6px; cursor: pointer;" id="progress-container">
+                <div class="progress-bar bg-white" role="progressbar" id="progress-bar" style="width: 0%;"></div>
+                </div>
+
+                <!-- Tiempos -->
+                <div class="d-flex justify-content-between text-white-50 small mb-3">
+                <span id="current-time">0:00</span>
+                <span id="duration">0:00</span>
+                </div>
+
+                <!-- Controles -->
+                <div class="d-flex justify-content-center align-items-center gap-3">
+                <button class="btn btn-outline-light rounded-circle p-2" id="btn-rewind" title="Retroceder 10s">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-replay-10" viewBox="0 0 16 16">
+                    <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+                    <path d="M8 4.466V.584a.25.25 0 0 1 .41-.192l2.36 1.94a.25.25 0 0 1 0 .384l-2.36 1.94A.25.25 0 0 1 8 4.466z"/>
+                    </svg>
+                </button>
+
+                <button class="btn btn-light text-primary rounded-circle p-3 shadow" id="btn-play-pause" style="width: 56px; height: 56px;">
+                    <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1a428a" class="bi bi-play-fill" viewBox="0 0 16 16">
+                    <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
+                    </svg>
+                    <svg id="icon-pause" class="d-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1a428a" class="bi bi-pause-fill" viewBox="0 0 16 16">
+                    <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/>
+                    </svg>
+                </button>
+
+                <button class="btn btn-outline-light rounded-circle p-2" id="btn-forward" title="Adelantar 10s">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-forward-fill" viewBox="0 0 16 16">
+                    <path d="m9.77 12.69 4.012-4.012a.5.5 0 0 0 0-.706L9.77 3.96A.5.5 0 0 0 9 4.314v2.532H1.5a.5.5 0 0 0-.5.5v1.308a.5.5 0 0 0 .5.5H9v2.532a.5.5 0 0 0 .77.414z"/>
+                    </svg>
+                </button>
+                </div>
+
+                <!-- Elemento Audio Oculto -->
+                <audio id="audio-element" src="/public/audio/Mezase.mp3"></audio>
+            </div>
+            </div>
+            <!--fin player-->
+            <!--fecha-->
+            <div class="container bg-white">
+                <div class="text-center my-5 txt-primary">
+                    <h1 class="mb-5 reveal">Guarda la fecha</h1>
+
+                    <h3 class="mb-5 reveal">23-11-2026</h3>
+
+                    <h4 class="mb-4 reveal">
+                        Faltan
+                    </h4>
+
+                    <div class="countdown reveal">
+
+                        <!-- DÍAS -->
+                        <div class="countdown-item">
+                            <span
+                                id="days"
+                                class="countdown-number"
+                            >
+                                00
+                            </span>
+
+                            <span class="countdown-label">
+                                Días
+                            </span>
+                        </div>
+
+
+                        <!-- HORAS -->
+                        <div class="countdown-item">
+                            <span
+                                id="hours"
+                                class="countdown-number"
+                            >
+                                00
+                            </span>
+
+                            <span class="countdown-label">
+                                Horas
+                            </span>
+                        </div>
+
+
+                        <!-- MINUTOS -->
+                        <div class="countdown-item">
+                            <span
+                                id="minutes"
+                                class="countdown-number"
+                            >
+                                00
+                            </span>
+
+                            <span class="countdown-label">
+                                Minutos
+                            </span>
+                        </div>
+
+
+                        <!-- SEGUNDOS -->
+                        <div class="countdown-item">
+                            <span
+                                id="seconds"
+                                class="countdown-number"
+                            >
+                                00
+                            </span>
+
+                            <span class="countdown-label">
+                                Segundos
+                            </span>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Mensaje cuando termina -->
+                    <div
+                        id="finished"
+                        class="mt-4 txt-primary d-none"
+                    >
+                        <h2 class="my-4 txt-primary reveal">
+                            ¡El momento ha llegado!
+                        </h2>
+                        
+                    </div>
+
+                </div>
+            </div>
+
+            <!--histori-->
+            <div class="bgd-primary  text-center text-white w-100 d-flex justify-content-center align-items-center flex-column p-5 reveal txt-primary">
+                <h1 class="reveal mb-4"> Nuestra historia</h1>
+                
+
+                <h5 class="reveal mb-4">
+                    Una historia que comenzó
+                    con un simple encuentro.
+                </h5>
+
+                <h5 class="reveal mb-4">
+                    Hay historias que comienzan de manera inesperada
+                    y terminan convirtiéndose en nuestro lugar favorito.
+                </h5>
+
+                <div class="book-wrapper mx-auto">
+
+                    <!-- Botón Lateral Izquierdo (<) -->
+                    <button class="nav-arrow left" id="btn-prev" aria-label="Anterior" disabled>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                        </svg>
+                    </button>
+
+                    <div class="book-container mx-auto reveal">
+                        <div class="book txt-primary" id="book">
+                            
+                            <!-- PÁGINA 1 -->
+                            <div class="page active" data-page="1">
+                            <div class="card h-100 border-0 shadow">
+                                <div class="card-body d-flex flex-column justify-content-center align-items-center text-center p-3">
+                                
+                                <h4 class="mb-4">EL COMIENZO</h4>
+                                <h6>Todo comenzó con una sonrisa.</h6>
+                                <h6>A veces las mejores historias
+                                                    comienzan sin que nos demos
+                                                    cuenta.</h6>
+                                <span class="badge bgd-primary mb-3">1 / 4</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            <!-- PÁGINA 2 -->
+                            <div class="page" data-page="2">
+                            <div class="card h-100 border-0 shadow">
+                                <div class="card-body d-flex flex-column justify-content-center align-items-center text-center p-3">
+                                
+                                <h4 class="mb-4">PRIMERAS AVENTURAS</h4>
+                                <h6> Y poco a poco,
+                                                    nos volvimos nosotros.</h6>
+                                <h6>Llegaron los viajes,
+                                                    las risas y todos esos
+                                                    momentos que hicieron
+                                                    crecer nuestra historia.</h6>
+                                <span class="badge bgd-primary mb-3">2 / 4</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            <!-- PÁGINA 3 -->
+                            <div class="page" data-page="3">
+                            <div class="card h-100 border-0 shadow">
+                                <div class="card-body d-flex flex-column justify-content-center align-items-center text-center p-3">
+                                
+                                <h4 class="mb-4">UN NUEVO CAPÍTULO</h4>
+                                <h6>Decidimos caminar
+                                                    juntos.</h6>
+                                <h6>Compartimos sueños,
+                                                    construimos recuerdos
+                                                    y comenzamos a imaginar
+                                                    todo lo que vendría.</h6>
+                                <span class="badge bgd-primary mb-3">3 / 4</span>
+                                </div>
+                            </div>
+                            </div>
+
+                            <!-- PÁGINA 4 -->
+                            <div class="page" data-page="4">
+                            <div class="card h-100 border-0 shadow">
+                                <div class="card-body d-flex flex-column justify-content-center align-items-center text-center p-3">
+                                
+                                <h4 class="mb-4">EL GRAN MOMENTO</h4>
+                                <h6>Nuestra siguiente
+                                                    aventura comienza aquí.</h6>
+                                <h6>Y queremos compartir
+                                                    este momento contigo.</h6>
+                                <span class="badge bgd-primary mb-3">4 / 4</span>
+                                </div>
+                            </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                        
+
+                        <!-- Botón Lateral Derecho (>) -->
+                    <button class="nav-arrow right" id="btn-next" aria-label="Siguiente">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <!--fn historia-->
+
+             <!--iglesia-->
+            <div class="container-fluid px-0">
+                <div class="w-100 d-flex justify-content-center align-items-center flex-column txt-primary">
+                    <img 
+                        src="/public/images/iglesia_tec.jpg" 
+                        alt="iglesia"
+                        class="img-fluid reveal"
+                        style="max-width: 100%; max-height: 100%; object-fit: contain;"
+                    >
+                    <div class="text-center  p-5">
+                        <h1 class="mb-5 reveal">Ceremonia Religiosa</h1>
+
+                        <h4 class="reveal">Capilla de San Marcos Evangelista</h4>
+                        <h4>12:30pm</h4>
+                    </div>
+                    
+                    <a href="https://maps.app.goo.gl/cAZJT5Ym1J2ShDCw7" target="_blank" class="btn-mapa mb-5 reveal">
+                        <button class="btn-ghost-primary">Ver en Maps</button>
+                    </a>
+                </div>
+            </div>
+            <!--fin iglesia-->
+
+            <!--recepcion-->
+            <div class="container-fluid px-0">
+                <div class="w-100 d-flex justify-content-center align-items-center flex-column bgd-primary">
+                    <img 
+                        id="img-recepcion"
+                        src="/public/images/recepcion.png" 
+                        alt="recepcion"
+                        class="img-fluid reveal"
+                        style=" max-height: 100%; object-fit: contain;"
+                    >
+                    <div class="text-center p-4 text-white">
+                        <h1 class="mb-5 reveal">Recepción</h1>
+
+                        <h5 class="reveal">Dirección del lugar #23</h5>
+                        <h5 class="reveal">2:00pm</h5>
+                    </div>
+                    
+                    <a href="https://maps.app.goo.gl/cAZJT5Ym1J2ShDCw7" target="_blank" class="btn-mapa mb-5 reveal ">
+                        <button class="btn-filled-secondary">Ver en Maps</button>
+                    </a>
+                </div>
+            </div>
+            <!--fin recepcion-->
+
+           
+            
+
+            <!--linea-->
+            <div class="container py-5 txt-primary">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="text-center reveal">Te compartimos los detalles de la celebración</h1>
+                        <div id="content">
+                            <ul class="timeline-1 text-black">
+                            <li class="event reveal" data-date="12:30pm">
+                                <h4 class="mb-3">Ceremonia Religiosa</h4>
+                                <img src="/public/images/steps/iglesia.png" class="time-line-image" alt="iglesia">
+                            </li>
+                            <li class="event reveal" data-date="2:30pm">
+                                <h4 class="mb-3 pt-3">Cocktail</h4>
+                                <img src="/public/images/steps/brindis.png"  class="time-line-image" alt="iglesia">
+                            </li>
+                            <li class="event reveal" data-date="5:00pm">
+                                <h4 class="mb-3 pt-3">Celebración</h4>
+                                <img src="/public/images/steps/restaurante.png"  class="time-line-image" alt="iglesia">
+                            </li>
+                            <li class="event reveal" data-date="9:30pm">
+                                <h4 class="mb-3 pt-3">¡A Bailar!</h4>
+                                <img src="/public/images/steps/baile.png"  class="time-line-image" alt="iglesia">
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--fin linea-->
+
+            <!--regalos-->
+            <div class="bgd-primary text-center text-white w-100 d-flex justify-content-center align-items-center flex-column p-5">
+                <h1 class="mb-5 reveal">Regalos</h1>
+                <h5 class="mb-5 reveal">
+                    El regalo es opcional, la asistencia obligatoria pero si quieres tener un detalle con nosotros te damos algunas ideas.		
+                </h5>
+                
+                <img class="mb-4 reveal" id="liverpool-img" src="/public/images/liverpool.png" alt="liverpool">
+
+                <a  href="https://maps.app.goo.gl/cAZJT5Ym1J2ShDCw7" target="_blank" class="btn-mapa mb-3 reveal">
+                        <button class="btn-ghost-secondary">Ver mesa de regalos</button>
+                    </a>
+                    <span class="reveal">No. evento 123456789</span>
+                
+            </div>
+            <!--fin regalos-->
+
+            <!-- Carousel -->
+            
+                <div id="carousel" class="carousel slide reveal" data-bs-ride="carousel">
+
+                <!-- Indicators/dots -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active"></button>
+                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="1"></button>
+                    <button type="button" data-bs-target="#carousel" data-bs-slide-to="2"></button>
+                </div>
+                
+                <!-- The slideshow/carousel -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                    <img src="/public/images/carrousel/c1.jpg" alt="foto 1" class="d-block" style="width:100%">
+                    </div>
+                    <div class="carousel-item">
+                    <img src="/public/images/carrousel/c2.jpg" alt="foto 2" class="d-block" style="width:100%">
+                    </div>
+                    <div class="carousel-item">
+                    <img src="/public/images/carrousel/c3.jpg" alt="foto 3" class="d-block" style="width:100%">
+                    </div>
+                </div>
+                
+                <!-- Left and right controls/icons -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+                </div>
+            
+            <!--fin carrousel-->
+
+            <!--fotos-->
+            <div class="container-fluid px-0 txt-primary">
+                <div class="w-100 d-flex justify-content-center align-items-center flex-column bg-white p-5">
+                    <h1 class="text-center reveal">Fotos del Evento</h1>
+                    <h5 class="text-center reveal mb-4">Los invitamos a que etiqueten las fotos de nuestra boda con este<br>hashtag</h5>
+                    <h4 class="reveal">#dulceygustavo</h4>
+                </div>
+            </div>
+            <!--fotos-->
+
+            <!--agradecimientos-->
+            <div class="bgd-primary  text-center text-white w-100 d-flex justify-content-center align-items-center flex-column p-5 reveal">
+                <h5 class="mb-4 reveal">
+                    Gracias por acompañarnos en este día tan especial para nosotros
+                </h5>
+
+                <h5 class="mb-5 reveal">Esperamos compartir contigo
+                una noche llena de amor, música,
+                abrazos y momentos que recordaremos siempre.</h5>
+
+                <h1 class="main-text reveal">Dulce & Gustavo</h1>
+                <h4>23-11-2026</h4>
+                
+                <i data-lucide="heart" fill="white" class="mt-3 reveal"></i>
+            </div>
+            <!--agradeciminetos-->
+        </div>
+
+    </div>
+
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="/public/js/envelop.js"></script>
+    <script src="/public/js/counter.js"></script>
+    <script src="/public/js/history.js"></script>
+    <script src="/public/js/base.js"></script>
+    <script src="/public/js/player.js"></script>
+    <!-- <script src="/public/js/timeLine.js"></script> -->
+    <script>lucide.createIcons();</script>
+
+  </body>
+</html>
