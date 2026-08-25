@@ -15,7 +15,7 @@
     */
 
 const targetDate =
-    new Date("2026-11-23T14:00:00").getTime();
+    new Date("2026-11-28T13:00:00").getTime();
 
 
 /*
