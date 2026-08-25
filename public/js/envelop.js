@@ -6,10 +6,10 @@ const welcomeText = document.querySelectorAll(".welcome-text");
 const scene = document.querySelector("#scene");
 const images = [
   "/public/images/env_1.jpg",
-  "/public//images/env_2.jpg",
-  "/public//images/env_252.jpg",
-  "/public//images/env_293.png",
-  "/public//images/env3.png",
+  "/public/images/env_2.jpg",
+  "/public/images/env_252.jpg",
+  "/public/images/env_293.png",
+  "/public/images/env3.png",
 ];
 
 let started = false;
