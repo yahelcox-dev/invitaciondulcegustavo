@@ -701,3 +701,126 @@
   bottom: 0;
 }
 } 
+
+/*stack gallery*/
+
+/* ==========================================================
+   GALERÍA STACK CUSTOM (AISLADA)
+   ========================================================== */
+
+/* Contenedor Principal */
+.gallery-stack-custom {
+  position: relative;
+  width: 100%;
+  overflow: hidden !important; /* Previene scroll horizontal del sitio */
+  padding: 20px 0;
+}
+
+/* Pila de Tarjetas */
+.gallery-stack-custom .stack-container {
+  position: relative;
+  width: 280px;
+  height: 360px;
+  margin: 20px auto 40px auto;
+  perspective: 1000px;
+  cursor: grab;
+
+  /* Bloqueo estricto de gestos nativos del navegador */
+  touch-action: none !important;
+  -webkit-touch-callout: none !important;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+  overscroll-behavior: none !important;
+  overscroll-behavior-x: none !important;
+}
+
+.gallery-stack-custom .stack-container:active {
+  cursor: grabbing;
+}
+
+/* Estilo Polaroid de las Tarjetas */
+.gallery-stack-custom .stack-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+  padding: 8px 8px 24px 8px;
+  box-shadow: 0 10px 25px rgba(23, 42, 70, 0.15);
+  border: 1px solid rgba(192, 197, 204, 0.4);
+  transform-origin: center bottom;
+  
+  /* Desactiva gestos nativos a nivel individual */
+  touch-action: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-tap-highlight-color: transparent;
+  
+  /* Transición fluida */
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+}
+
+/* Imagen dentro de la tarjeta */
+.gallery-stack-custom .stack-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  pointer-events: none !important; /* Evita que la imagen intercepte el toque */
+  -webkit-user-drag: none !important;
+}
+
+/* Estado al descartar hacia la izquierda */
+.gallery-stack-custom .stack-card.swiped-out {
+  transform: translate(-150%, -20px) rotate(-25deg) !important;
+  opacity: 0 !important;
+}
+
+/* Estado al descartar hacia la derecha */
+.gallery-stack-custom .stack-card.swiped-right {
+  transform: translate(150%, -20px) rotate(25deg) !important;
+  opacity: 0 !important;
+}
+
+/* Ajuste Responsivo para Pantallas Medianas/Grandes */
+@media (min-width: 768px) {
+  .gallery-stack-custom .stack-container {
+    width: 420px; 
+    height: 620px;
+  }
+}
+
+
+/* Indicador Minimalista A */
+.gallery-instruction-minimal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.gallery-instruction-minimal .instruction-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #172A46;
+  display: inline-block;
+  animation: pulseDot 2s infinite ease-in-out;
+}
+
+.gallery-instruction-minimal .instruction-text {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.7rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase;
+  color: #172A46 !important;
+  opacity: 0.7;
+}
+
+@keyframes pulseDot {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
