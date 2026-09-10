@@ -1,0 +1,703 @@
+
+  #flower-bottom-left{
+    position: absolute;
+    width: 22%;
+    left: -7%;
+    bottom: -13%;
+    max-height: 473px;
+  }
+
+  #flower-top-left{
+    position: absolute;
+    top: 10px;
+    width: 30%;
+    left: -13%;
+    max-height: 226px;
+  }
+
+  #flower-top-right{
+    position: absolute;
+    top: 10px;
+    width: 30%;
+    right: -4%;
+    max-height: 273px;
+  }
+
+  #imageContainer{
+    overflow: hidden;
+  }
+
+  #flower-bottom{
+    width: 13%;
+    min-width: 122px;
+  }
+
+  .border-right{
+    border-right: 4px solid var(--Primary);
+}
+
+  .heart-divider-solid {
+    width: 171px;
+    }
+
+ .tarjeta-invitacion {
+  position: relative;
+  background-color: #ffffff;
+  color: #4a5568; /* Color de texto legible para fondo blanco (Gris oscuro/grafito) */
+  padding: 50px 24px;
+  /* max-width: 420px; */
+  margin: 0 auto;
+  min-height: 650px;
+  box-sizing: border-box;
+}
+
+/* 1. Línea de marco interior */
+.tarjeta-invitacion::before {
+  content: '';
+  position: absolute;
+  top: 16px;
+  bottom: 16px;
+  left: 16px;
+  right: 16px;
+  border: 2px solid #C0C5CC; /* Borde visible sobre blanco */
+  pointer-events: none;
+}
+
+/* 2. Adornos de Filigrana en las 4 esquinas */
+.tarjeta-invitacion::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 8px;
+  right: 8px;
+  pointer-events: none;
+
+  /* SVG vectorizado adaptado a #C0C5CC (%23C0C5CC) */
+  background-image: 
+    /* Esquina superior izquierda */
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="%23C0C5CC" stroke-width="2.3"><path d="M8 32 C8 16 16 8 32 8 M8 22 C4 22 4 15 9 15 C14 15 14 20 10 20 M22 8 C22 4 15 4 15 9 C15 14 20 14 20 10"/><circle cx="8" cy="8" r="1.5" fill="%23C0C5CC"/></svg>'),
+    /* Esquina superior derecha */
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="%23C0C5CC" stroke-width="2.3"><path d="M32 32 C32 16 24 8 8 8 M32 22 C36 22 36 15 31 15 C26 15 26 20 30 20 M18 8 C18 4 25 4 25 9 C25 14 20 14 20 10"/><circle cx="32" cy="8" r="1.5" fill="%23C0C5CC"/></svg>'),
+    /* Esquina inferior izquierda */
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="%23C0C5CC" stroke-width="2.3"><path d="M8 8 C8 24 16 32 32 32 M8 18 C4 18 4 25 9 25 C14 25 14 20 10 20 M22 32 C22 36 15 36 15 31 C15 26 20 26 20 30"/><circle cx="8" cy="32" r="1.5" fill="%23C0C5CC"/></svg>'),
+    /* Esquina inferior derecha */
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 40 40" fill="none" stroke="%23C0C5CC" stroke-width="2.3"><path d="M32 8 C32 24 24 32 8 32 M32 18 C36 18 36 25 31 25 C26 25 26 20 30 20 M18 32 C18 36 25 36 25 31 C25 26 20 26 20 30"/><circle cx="32" cy="32" r="1.5" fill="%23C0C5CC"/></svg>');
+
+  background-repeat: no-repeat;
+  background-position: 
+    top left, 
+    top right, 
+    bottom left, 
+    bottom right;
+}
+
+
+
+/* Adorno superior central */
+.decoracion-hojas-top {
+  width: 90px;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 auto 24px auto;
+}
+
+.botanical-divider-solid{
+    width: 145px;
+}
+
+#history-image{
+    width: 100%;
+      filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+
+.btn-calendar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #FFFFFF;
+  color: #4A5568;
+  border: 1px solid #C0C5CC;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-family: inherit;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.btn-calendar:hover {
+  background-color: #F8FAFC;
+  border-color: #94A3B8;
+  color: #1E293B;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.btn-calendar svg {
+  fill: #C0C5CC;
+  transition: fill 0.3s ease;
+}
+
+.btn-calendar:hover svg {
+  fill: #64748B;
+}
+
+
+
+
+/*desktop*/
+@media (min-width: 992px){
+    .heart-divider-solid {
+        max-width: 228px;
+    }
+
+    .botanical-divider-solid{
+        width: 200px;
+    }
+
+}
+
+
+
+/*linea*/
+
+.timeline-history-container {
+  width: 100%;
+  padding: 20px 0;
+}
+
+.timeline-history-wrapper {
+  position: relative;
+}
+
+/* Base común */
+.timeline-history-item {
+  position: relative;
+  z-index: 2;
+  display: flex;
+}
+
+.timeline-history-icon-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1.5px solid #C0C5CC;
+  background-color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.timeline-history-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #C0C5CC;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px #FFFFFF;
+  flex-shrink: 0;
+}
+
+.timeline-history-content .timeline-history-year {
+  display: block;
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #4A5568;
+}
+
+.timeline-history-content .timeline-history-description {
+  font-size: 0.88rem;
+  color: #718096;
+  margin: 0;
+}
+
+/* =========================================================
+   1. MODO MÓVIL (< 992px): ANIMACIÓN DE TEXTO E ICONOS CON SCROLL
+   ========================================================= */
+@media (max-width: 991.98px) {
+  .timeline-history-wrapper {
+    padding-left: 10px;
+  }
+
+  /* Línea gris de fondo */
+  .timeline-history-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    bottom: 25px;
+    left: 35px;
+    width: 2px;
+    background-color: #E2E8F0;
+    z-index: 1;
+  }
+
+  /* Línea de relleno plateada (#C0C5CC) */
+  .timeline-history-progress-line {
+    position: absolute;
+    top: 25px;
+    left: 35px;
+    width: 2px;
+    height: 0%;
+    background-color: #C0C5CC;
+    z-index: 1;
+    transition: height 0.25s ease-out;
+  }
+
+  /* Contenedor de cada ítem */
+  .timeline-history-item {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 28px;
+    opacity: 1; /* El contenedor base permanece activo para la línea */
+  }
+
+  .timeline-history-item:last-child {
+    margin-bottom: 0;
+  }
+
+  /* Animación del Ícono (Escala suave) */
+  .timeline-history-icon-circle {
+    opacity: 0.3;
+    transform: scale(0.8);
+    transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.5s ease;
+  }
+
+  /* Animación del Texto (Fade-in + Desplazamiento desde la izquierda) */
+  .timeline-history-content {
+    margin-left: 16px;
+    text-align: left;
+    opacity: 0;
+    transform: translateX(-15px);
+    transition: opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s; /* Pequeño delay de 0.15s */
+  }
+
+  /* --- ESTADO REVELADO (Activo al hacer scroll) --- */
+  .timeline-history-item.is-visible .timeline-history-icon-circle {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  .timeline-history-item.is-visible .timeline-history-content {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .timeline-history-dot {
+    display: none;
+  }
+}
+
+/* =========================================================
+   2. MODO DESKTOP (>= 992px): VISTA ESTÁTICA ORIGINAL
+   ========================================================= */
+@media (min-width: 992px) {
+  .timeline-history-wrapper::before {
+    content: '';
+    position: absolute;
+    left: 40px;
+    right: 40px;
+    top: 72px;
+    height: 2px;
+    background-color: #C0C5CC;
+    z-index: 1;
+  }
+
+  .timeline-history-progress-line {
+    display: none; /* Se oculta la barra dinámica en desktop */
+  }
+
+  .timeline-history-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex: 1;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .timeline-history-icon-circle {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 8px;
+  }
+
+  .timeline-history-dot {
+    margin-bottom: 12px;
+  }
+}
+
+
+
+/*locacion*/
+
+/* Título Cursiva / Script */
+.location-title {
+  font-family: 'Great Vibes', 'Cormorant Garamond', cursive, serif;
+  font-size: 2.8rem;
+  color: #172A46;
+  font-weight: 400;
+}
+
+/* Textos informativos */
+.location-place {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  color: #4A5568;
+}
+
+.location-time {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  color: #4A5568;
+  font-weight: 600;
+}
+
+/* Botón con contorno sutil */
+.btn-maps {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  color: #4A5568;
+  border: 1px solid #C0C5CC;
+  background-color: #FFFFFF;
+  padding: 8px 22px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-maps:hover {
+  background-color: #C0C5CC;
+  color: #FFFFFF;
+  border-color: #C0C5CC;
+}
+
+/* Ajustes Responsive para la Imagen */
+@media (max-width: 991.98px) {
+  /* En móvil la imagen abarca el 100% real sin padding horizontal */
+  .location-image-wrapper img {
+    max-height: 380px;
+    object-fit: cover;
+  }
+}
+
+@media (min-width: 992px) {
+  /* En escritorio mantiene una proporción fija elegante con esquinas suaves */
+  .location-image-wrapper img {
+    height: 450px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  }
+}
+
+
+/*frase*/
+.quote-minimal-section {
+  background-color: #FFFFFF;
+}
+
+/* Cita principal limpia en Serif Cursiva */
+.quote-minimal-main {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: #172A46;
+  line-height: 1.5;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+/* Separador elegante con punto plateado (#C0C5CC) */
+.quote-minimal-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dot-silver {
+  width: 5px;
+  height: 5px;
+  background-color: #C0C5CC;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Texto de soporte */
+.quote-minimal-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.15rem;
+  color: #50627A;
+  line-height: 1.6;
+  font-weight: 300;
+}
+
+/* Escalado para escritorio */
+@media (min-width: 992px) {
+  .quote-minimal-main {
+    font-size: 1.9rem;
+  }
+  
+  .quote-minimal-sub {
+    font-size: 1.3rem;
+  }
+} 
+
+
+
+/*cronograma*/
+
+/* Aislamiento del contenedor */
+.scroll-timeline-custom .timeline-wrapper {
+  position: relative !important;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+/* Línea Gris Base */
+.scroll-timeline-custom .timeline-line-bg {
+  position: absolute !important;
+  left: 90px !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: 2px !important;
+  background-color: #E2E8F0 !important;
+  z-index: 1 !important;
+}
+
+/* Línea Azul de Progreso */
+.scroll-timeline-custom .timeline-progress-bar {
+  position: absolute !important;
+  left: 90px !important;
+  top: 0 !important;
+  width: 2px !important;
+  height: 0%;
+  background-color: #172A46 !important;
+  z-index: 2 !important;
+  transition: height 0.1s ease-out;
+}
+
+/* Lista de Eventos */
+.scroll-timeline-custom .timeline-events-list {
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+.scroll-timeline-custom .timeline-event-item {
+  position: relative !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  margin-bottom: 45px !important;
+}
+
+.scroll-timeline-custom .timeline-event-item:last-child {
+  margin-bottom: 0 !important;
+}
+
+/* Hora a la izquierda */
+.scroll-timeline-custom .timeline-time {
+  width: 75px !important;
+  text-align: right !important;
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  color: #172A46 !important;
+  padding-right: 15px !important;
+  margin-top: 2px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Punto indicador en la línea */
+.scroll-timeline-custom .timeline-node {
+  width: 12px !important;
+  height: 12px !important;
+  border-radius: 50% !important;
+  background-color: #FFFFFF !important;
+  border: 2px solid #C0C5CC !important;
+  margin-top: 6px !important;
+  margin-left: -6px !important; /* Centra el punto exacto sobre la línea de 2px */
+  z-index: 4 !important;
+  transition: all 0.3s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.scroll-timeline-custom .timeline-event-item.active .timeline-node {
+  border-color: #172A46 !important;
+  background-color: #172A46 !important;
+}
+
+/* Contenido del Evento */
+.scroll-timeline-custom .timeline-content {
+  padding-left: 25px !important;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 0.5s ease-out !important;
+  border: none !important; /* Elimina cualquier borde no deseado previo */
+}
+
+.scroll-timeline-custom .timeline-event-item.active .timeline-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.scroll-timeline-custom .timeline-content h4 {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 1.5rem !important;
+  color: #172A46 !important;
+  margin-bottom: 10px !important;
+  margin-top: 0 !important;
+}
+
+.scroll-timeline-custom .time-line-image {
+  max-width: 65px !important;
+  height: auto !important;
+  display: block !important;
+}
+
+
+/*regalos*/
+/* Tarjeta Contenedora Principal */
+.gift-card-custom {
+  background-color: #172A46 !important; /* Azul marino principal */
+  border: 1px solid rgba(192, 197, 204, 0.3);
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+/* Título Serif */
+.gift-card-custom .gift-title {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 1.8rem !important;
+  letter-spacing: 3px !important;
+  line-height: 1.2 !important;
+  color: #FFFFFF !important;
+  font-weight: 500 !important;
+}
+
+/* Texto de la tarjeta */
+.gift-card-custom .gift-text {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: 1.15rem !important;
+  line-height: 1.5 !important;
+  color: #E2E8F0 !important;
+  font-weight: 300 !important;
+  padding: 0 10px;
+}
+
+/* Botón con contorno blanco fino */
+.gift-card-custom .btn-gift-options {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 2px !important;
+  color: #FFFFFF !important;
+  border: 1px solid rgba(255, 255, 255, 0.7) !important;
+  background: transparent !important;
+  padding: 10px 24px !important;
+  border-radius: 4px !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+}
+
+.gift-card-custom .btn-gift-options:hover {
+  background-color: #FFFFFF !important;
+  color: #172A46 !important;
+  border-color: #FFFFFF !important;
+}
+
+/* Posicionamiento de las Ramas Botánicas SVG */
+.gift-card-custom .botanical-corner {
+  position: absolute !important;
+  width: 90px;
+  height: 90px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.gift-card-custom .botanical-corner.top-left {
+  top: 0;
+  left: 0;
+}
+
+.gift-card-custom .botanical-corner.bottom-right {
+  bottom: 0;
+  right: 0;
+}
+
+
+/*regalo*/
+#flower-top-gift{
+  position: absolute;
+  width: 10%;
+  left: -15px;
+  top: -1%;
+}
+
+#flower-bottom-gift{
+  position: absolute;
+  width: 10%;
+  right: 0px;
+  bottom: -1.7%;
+}
+
+@media (max-width: 991.98px) {
+  #flower-top-gift{
+    width: 32%;
+  }
+
+  #flower-bottom-gift{
+    width: 32%;
+  }
+}
+
+
+/*main image*/
+#flower-top-main-image{
+  position: absolute;
+  width: 16%;
+  top: 0;
+  left: -8px;
+}
+
+#flower-bottom-right-main-image{
+  position: absolute;
+  width: 16%;
+  bottom: 4%;
+  right: -9px;
+}
+
+#flower-bottom-left-main-image{
+  position: absolute;
+  width: 25%;
+  left: -52px;
+  bottom: 0px;
+  z-index: 1;
+}
+
+
+/* Escalado para escritorio */
+@media (min-width: 992px) {
+  #flower-top-main-image{
+  position: absolute;
+  width: 16%;
+  top: 0;
+  left: -25px;
+}
+
+#flower-bottom-right-main-image{
+  position: absolute;
+  width: 16%;
+  bottom: 16%;
+  right: -25px;
+}
+
+#flower-bottom-left-main-image{
+  position: absolute;
+  width: 23%;
+  left: -42px;
+  bottom: 0;
+}
+} 
