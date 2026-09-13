@@ -1,0 +1,77 @@
+/* ==========================================================
+   GALERÍA STACK (BLOQUEO ANTI-SCROLL MÓVIL DEFINITIVO)
+   ========================================================== */
+
+.gallery-stack-custom {
+  position: relative;
+  width: 100%;
+  display: block;
+  clear: both;
+  padding: 20px 0;
+  /* Evita desbordamiento horizontal en el cuerpo de la página */
+  overflow: hidden; 
+}
+
+.gallery-stack-custom .stack-container {
+  position: relative;
+  width: 460px;
+  max-width: 90%;
+  aspect-ratio: 4 / 5; 
+  margin: 20px auto 40px auto;
+  perspective: 1000px;
+  cursor: grab;
+  
+  /* Desactiva TODOS los gestos del navegador (Scroll vertical, horizontal y zoom) */
+  touch-action: none !important;
+  -ms-touch-action: none !important;
+  overscroll-behavior: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+}
+
+.gallery-stack-custom .stack-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #ffffff;
+  padding: 10px 10px 24px 10px;
+  box-shadow: 0 10px 25px rgba(23, 42, 70, 0.15);
+  border: 1px solid rgba(192, 197, 204, 0.4);
+  transform-origin: center bottom;
+  
+  /* Forzado de anulación de gestos nativos en iOS y Android */
+  touch-action: none !important;
+  -ms-touch-action: none !important;
+  overscroll-behavior: none !important;
+  -webkit-user-drag: none !important;
+  
+  will-change: transform, opacity;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+}
+
+.gallery-stack-custom .stack-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+  background-color: #F8F9FA;
+  border-radius: 6px;
+  pointer-events: none !important;
+  -webkit-user-drag: none !important;
+}
+
+.gallery-stack-custom .stack-card.swiped-out {
+  transform: translate(-140%, -15px) rotate(-20deg) !important;
+  opacity: 0 !important;
+  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.22s linear !important;
+}
+
+.gallery-stack-custom .stack-card.swiped-right {
+  transform: translate(140%, -15px) rotate(20deg) !important;
+  opacity: 0 !important;
+  transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.22s linear !important;
+}

@@ -18,14 +18,17 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     />
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     <link rel="stylesheet" href="./public/css/style.css">
     <link rel="stylesheet" href="./public/css/envelop.css">
     <link rel="stylesheet" href="./public/css/counter.css">
     <link rel="stylesheet" href="./public/css/timeLine.css">
     <link rel="stylesheet" href="./public/css/history.css">
-     <link rel="stylesheet" href="./public/css/player.css">
+    <link rel="stylesheet" href="./public/css/player.css">
      <link rel="stylesheet" href="./public/css/line.css">
      <link rel="stylesheet" href="./public/css/base.css">
+     <link rel="stylesheet" href="./public/css/galleryStack.css">
      
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
@@ -98,6 +101,7 @@
                 <img id="flower-bottom-right-main-image" src="./public/images/topright.png" alt="flower">
                 <img id="flower-top-main-image" src="./public/images/toprightgift.png" alt="flower">
             </div>
+
             <!--frase-->
             <section class="quote-minimal-section py-5 my-4 text-center">
                 <div class="container">
@@ -133,56 +137,6 @@
                 </div>
             </section>
             <!--fin frase-->
-            <!--player-->
-            <!-- Reproductor de Audio -->
-            <div class="card audio-player-card border-0 shadow-lg mx-auto d-none" style="max-width: 400px;">
-            <div class="card-body p-4 text-center">
-                
-                <!-- Título / Info -->
-                <h6 class="card-subtitle mb-1 text-white-50 text-uppercase tracking-wide small">Música de fondo</h6>
-                <h5 class="card-title fw-bold text-white mb-3 text-primary">Nuestra Canción</h5>
-
-                <!-- Barra de Progreso -->
-                <div class="progress mb-3" style="height: 6px; cursor: pointer;" id="progress-container">
-                <div class="progress-bar bg-white" role="progressbar" id="progress-bar" style="width: 0%;"></div>
-                </div>
-
-                <!-- Tiempos -->
-                <div class="d-flex justify-content-between text-white-50 small mb-3">
-                <span id="current-time">0:00</span>
-                <span id="duration">0:00</span>
-                </div>
-
-                <!-- Controles -->
-                <div class="d-flex justify-content-center align-items-center gap-3">
-                <button class="btn btn-outline-light rounded-circle p-2" id="btn-rewind" title="Retroceder 10s">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-replay-10" viewBox="0 0 16 16">
-                    <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
-                    <path d="M8 4.466V.584a.25.25 0 0 1 .41-.192l2.36 1.94a.25.25 0 0 1 0 .384l-2.36 1.94A.25.25 0 0 1 8 4.466z"/>
-                    </svg>
-                </button>
-
-                <button class="btn btn-light text-primary rounded-circle p-3 shadow" id="btn-play-pause" style="width: 56px; height: 56px;">
-                    <svg id="icon-play" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1a428a" class="bi bi-play-fill" viewBox="0 0 16 16">
-                    <path d="m11.596 8.697-6.363 3.692c-.54.313-1.233-.066-1.233-.697V4.308c0-.63.692-1.01 1.233-.696l6.363 3.692a.802.802 0 0 1 0 1.393z"/>
-                    </svg>
-                    <svg id="icon-pause" class="d-none" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#1a428a" class="bi bi-pause-fill" viewBox="0 0 16 16">
-                    <path d="M5.5 3.5A1.5 1.5 0 0 1 7 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5zm5 0A1.5 1.5 0 0 1 12 5v6a1.5 1.5 0 0 1-3 0V5a1.5 1.5 0 0 1 1.5-1.5z"/>
-                    </svg>
-                </button>
-
-                <button class="btn btn-outline-light rounded-circle p-2" id="btn-forward" title="Adelantar 10s">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-forward-fill" viewBox="0 0 16 16">
-                    <path d="m9.77 12.69 4.012-4.012a.5.5 0 0 0 0-.706L9.77 3.96A.5.5 0 0 0 9 4.314v2.532H1.5a.5.5 0 0 0-.5.5v1.308a.5.5 0 0 0 .5.5H9v2.532a.5.5 0 0 0 .77.414z"/>
-                    </svg>
-                </button>
-                </div>
-
-                <!-- Elemento Audio Oculto -->
-                <audio id="audio-element" src="./public/audio/Mezase.mp3"></audio>
-            </div>
-            </div>
-            <!--fin player-->
 
             <!--padres-->
             <section class="container-fluid family-section text-center py-5" style="background-color: #FFFFFF;">
@@ -732,7 +686,7 @@
                             <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
                         </svg>
                         <span style="font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; color: #172A46;">
-                            Dirección del lugar #23
+                            Calle Morelos #16 San Marcos Tecomaxusco. Edo Mex.
                         </span>
                         </div>
 
@@ -870,15 +824,54 @@
 
                 <!-- Contenedor de la Galería -->
                 <div class="stack-container" id="stackContainer">
-                <div class="stack-card">
-                    <img src="./public/images/carrousel/c1.jpeg" alt="Foto 1">
-                </div>
-                <div class="stack-card">
-                    <img src="./public/images/carrousel/c2.jpg" alt="Foto 2">
-                </div>
-                <div class="stack-card">
-                    <img src="./public/images/carrousel/c3.jpg" alt="Foto 3">
-                </div>
+                    <div class="stack-card">
+                        <img src="./public/images/carrousel/c1.jpeg" alt="Foto 1">
+                    </div>
+                    <div class="stack-card">
+                        <img src="./public/images/carrousel/c2.jpeg" alt="Foto 2">
+                    </div>
+                    <div class="stack-card">
+                        <img src="./public/images/carrousel/c3.jpeg" alt="Foto 3">
+                    </div>
+
+                    <div class="stack-card">
+                        <img src="./public/images/carrousel/c4.jpeg" alt="Foto 4">
+                    </div>
+                    <div class="stack-card">
+                        <img src="./public/images/carrousel/c5.jpeg" alt="Foto 5">
+                    </div>
+                    <div class="stack-card">
+                        <img src="./public/images/carrousel/c6.jpeg" alt="Foto 6">
+                    </div>
+
+                    <div class="stack-card">
+                        <img src="./public/images/carrousel/c7.jpeg" alt="Foto 7">
+                    </div>
+                    <div class="stack-card">
+                        <img src="./public/images/carrousel/c8.jpeg" alt="Foto 8">
+                    </div>
+                    <div class="stack-card">
+                        <img src="./public/images/carrousel/c9.jpeg" alt="Foto 9">
+                    </div>
+
+                    <div class="stack-card">
+                        <img src="./public/images/carrousel/c10.jpeg" alt="Foto 10">
+                    </div>
+                    <div class="stack-card">
+                        <img src="./public/images/carrousel/c11.jpeg" alt="Foto 11">
+                    </div>
+                    <div class="stack-card">
+                        <img src="./public/images/carrousel/c12.jpeg" alt="Foto 12">
+                    </div>
+
+                    <div class="stack-card">
+                        <img src="./public/images/carrousel/c13.jpeg" alt="Foto 13">
+                    </div>
+                    <div class="stack-card">
+                        <img src="./public/images/carrousel/c14.jpeg" alt="Foto 14">
+                    </div>
+
+                    
                 </div>
             </div>
             </section>
@@ -937,11 +930,51 @@
             </div>
             <!--agradeciminetos-->
 
-            
+           
+  
+
+  
+
+
 
         </div>
 
     </div>
+
+
+
+    <!-- WIDGET DE AUDIO (Palo directo en body para evitar conflictos de scroll) -->
+  <!-- Widget Flotante de Audio (Plegable) -->
+<div id="audioWidget" class=" d-none audio-widget-container collapsed">
+  <audio id="weddingAudio" src="./public/audio/Mezase.mp3" preload="auto" loop></audio>
+
+  <!-- Botón de Barras / Disparador para Expandir -->
+  <div class="sound-wave" id="soundWave" title="Desplegar controles de audio">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+
+  <!-- Contenido Desplegable -->
+  <div class="audio-controls-content">
+    <!-- Botón Play/Pause -->
+    <button id="audioToggleBtn" class="audio-btn" aria-label="Reproducir o pausar música">
+      <i class="bi bi-play-fill" id="audioIcon"></i>
+    </button>
+
+    <!-- Control de Volumen -->
+    <div class="volume-container">
+      <i class="bi bi-volume-down-fill volume-icon"></i>
+      <input type="range" id="volumeSlider" class="volume-slider" min="0" max="1" step="0.01" value="0.7">
+    </div>
+
+    <!-- Botón para Contraer -->
+    <button id="collapseBtn" class="audio-btn collapse-btn" title="Contraer">
+      <i class="bi bi-chevron-right"></i>
+    </button>
+  </div>
+</div>
 
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -953,6 +986,7 @@
     <script src="./public/js/player.js"></script>
     <!-- <script src="./public/js/line.js"></script> -->
     <script src="./public/js/saveDate.js"></script>
+    <script src="./public/js/galleyStack.js"></script>
     <!-- <script src="./public/js/timeLine.js"></script> -->
     <script>lucide.createIcons();</script>
 

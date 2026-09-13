@@ -1,57 +1,69 @@
+window.playWeddingMusic = function() {
+const container = document.querySelector("#audioWidget");
+container.classList.remove("d-none");
+container.classList.add("animate__animated")
+container.classList.add("animate__fadeInRight")
+container.classList.add("d-flex")
+
+
+  const audio = document.getElementById("weddingAudio");
+  const icon = document.getElementById("audioIcon");
+  const wave = document.getElementById("soundWave");
+
+  if (audio && audio.paused) {
+    audio.play().then(() => {
+      icon.className = "bi bi-pause-fill";
+      wave.classList.add("playing");
+    }).catch(err => {
+      console.log("Autoplay restringido por el navegador:", err);
+    });
+  }
+};
+
 document.addEventListener("DOMContentLoaded", () => {
-  const audio = document.getElementById("audio-element");
-  const playPauseBtn = document.getElementById("btn-play-pause");
-  const iconPlay = document.getElementById("icon-play");
-  const iconPause = document.getElementById("icon-pause");
-  const progressBar = document.getElementById("progress-bar");
-  const progressContainer = document.getElementById("progress-container");
-  const currentTimeEl = document.getElementById("current-time");
-  const durationEl = document.getElementById("duration");
-  const rewindBtn = document.getElementById("btn-rewind");
-  const forwardBtn = document.getElementById("btn-forward");
+  const audio = document.getElementById("weddingAudio");
+  const widget = document.getElementById("audioWidget");
+  const toggleBtn = document.getElementById("audioToggleBtn");
+  const collapseBtn = document.getElementById("collapseBtn");
+  const wave = document.getElementById("soundWave");
+  const icon = document.getElementById("audioIcon");
+  const volumeSlider = document.getElementById("volumeSlider");
 
-  // Formatear segundos a mm:ss
-  const formatTime = (seconds) => {
-    const min = Math.floor(seconds / 60);
-    const sec = Math.floor(seconds % 60);
-    return `${min}:${sec < 10 ? "0" : ""}${sec}`;
-  };
+  if (!audio || !widget) return;
 
-  // Cargar duración total
-  audio.addEventListener("loadedmetadata", () => {
-    durationEl.textContent = formatTime(audio.duration);
-  });
+  audio.loop = true;
+  audio.volume = volumeSlider.value;
 
   // Alternar Reproducción / Pausa
-  playPauseBtn.addEventListener("click", () => {
+  function toggleAudio(e) {
+    e.stopPropagation();
     if (audio.paused) {
       audio.play();
-      iconPlay.classList.add("d-none");
-      iconPause.classList.remove("d-none");
+      icon.className = "bi bi-pause-fill";
+      wave.classList.add("playing");
     } else {
       audio.pause();
-      iconPause.classList.add("d-none");
-      iconPlay.classList.remove("d-none");
+      icon.className = "bi bi-play-fill";
+      wave.classList.remove("playing");
+    }
+  }
+
+  // Expandir al hacer clic en las barras o el widget contraído
+  widget.addEventListener("click", () => {
+    if (widget.classList.contains("collapsed")) {
+      widget.classList.remove("collapsed");
     }
   });
 
-  // Actualizar barra de progreso y tiempo actual
-  audio.addEventListener("timeupdate", () => {
-    if (audio.duration) {
-      const progressPercent = (audio.currentTime / audio.duration) * 100;
-      progressBar.style.width = `${progressPercent}%`;
-      currentTimeEl.textContent = formatTime(audio.currentTime);
-    }
+  // Contraer al hacer clic en la flecha
+  collapseBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    widget.classList.add("collapsed");
   });
 
-  // Hacer click en la barra para adelantar o retroceder
-  progressContainer.addEventListener("click", (e) => {
-    const width = progressContainer.clientWidth;
-    const clickX = e.offsetX;
-    audio.currentTime = (clickX / width) * audio.duration;
-  });
+  toggleBtn.addEventListener("click", toggleAudio);
 
-  // Controles de retroceso y avance rápido
-  rewindBtn.addEventListener("click", () => (audio.currentTime -= 10));
-  forwardBtn.addEventListener("click", () => (audio.currentTime += 10));
+  volumeSlider.addEventListener("input", (e) => {
+    audio.volume = e.target.value;
+  });
 });

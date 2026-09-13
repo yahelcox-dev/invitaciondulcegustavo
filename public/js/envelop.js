@@ -82,8 +82,9 @@ function showFinalContainer() {
     imageContainer.classList.add("visually-hidden")
     showMainTextTop()
 
-    const audio = document.getElementById("audio-element");
-    audio.play();
+    // const audio = document.getElementById("audio-element");
+    // audio.play();
+    playWeddingMusic()
 }
 
 function showMainTextTop(){
