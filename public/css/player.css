@@ -1,33 +1,137 @@
-.audio-player-card {
-  background-color: #1a428a; /* Royal Blue */
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+/*reproductor*/
+
+/* ==========================================================
+   WIDGET FLOTANTE DE AUDIO (PLEGABLE MINIMALISTA)
+   ========================================================== */
+
+#audioWidget.audio-widget-container {
+  position: fixed !important;
+  bottom: 24px !important;
+  right: 24px !important;
+  z-index: 99999 !important;
+  /* display: flex !important; */
+  align-items: center !important;
+  gap: 12px !important;
+  background-color: #FFFFFF !important;
+  padding: 8px 14px !important;
+  border-radius: 30px !important;
+  box-shadow: 0 8px 25px rgba(23, 42, 70, 0.18) !important;
+  border: 1px solid #C0C5CC !important;
+  user-select: none !important;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
-.progress {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
+/* Área de Controles */
+.audio-controls-content {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  opacity: 1;
+  max-width: 200px;
+  overflow: hidden;
+  transition: max-width 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
 }
 
-.btn-light {
-  background-color: #ffffff;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: transform 0.2s ease, background-color 0.2s ease;
+/* Estado Contraído (Solo Barras) */
+#audioWidget.collapsed {
+  padding: 10px 12px !important;
+  cursor: pointer;
 }
 
-.btn-light:hover {
-  background-color: #f0f0f0;
-  transform: scale(1.05);
+#audioWidget.collapsed .audio-controls-content {
+  max-width: 0 !important;
+  opacity: 0 !important;
+  margin: 0 !important;
+  pointer-events: none;
 }
 
-.btn-outline-light {
-  border-color: rgba(255, 255, 255, 0.4);
+/* Botones */
+.audio-btn {
+  background: none !important;
+  border: none !important;
+  color: #172A46 !important;
+  font-size: 1.2rem !important;
+  padding: 0 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  outline: none !important;
+  line-height: 1 !important;
 }
 
-.btn-outline-light:hover {
-  background-color: rgba(255, 255, 255, 0.15);
-  border-color: #ffffff;
+.collapse-btn {
+  font-size: 0.9rem !important;
+  color: #C0C5CC !important;
+  transition: color 0.2s ease;
+  margin-left: 2px;
+}
+
+.collapse-btn:hover {
+  color: #172A46 !important;
+}
+
+/* Ondas de Sonido */
+.sound-wave {
+  display: flex !important;
+  align-items: flex-end !important;
+  gap: 3px !important;
+  height: 16px !important;
+  width: 18px !important;
+  cursor: pointer;
+}
+
+.sound-wave .bar {
+  width: 3px !important;
+  background-color: #172A46 !important;
+  border-radius: 2px !important;
+  transform-origin: bottom !important;
+  height: 4px;
+  transition: height 0.3s ease;
+}
+
+.sound-wave.playing .bar {
+  animation: wavePulse 1.2s infinite ease-in-out alternate;
+}
+
+.sound-wave.playing .bar:nth-child(1) { animation-delay: 0.1s; }
+.sound-wave.playing .bar:nth-child(2) { animation-delay: 0.4s; }
+.sound-wave.playing .bar:nth-child(3) { animation-delay: 0.2s; }
+.sound-wave.playing .bar:nth-child(4) { animation-delay: 0.5s; }
+
+@keyframes wavePulse {
+  0% { height: 4px; }
+  100% { height: 16px; }
+}
+
+/* Volumen */
+.volume-container {
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  width: 65px !important;
+}
+
+.volume-icon {
+  font-size: 0.85rem !important;
+  color: #172A46 !important;
+}
+
+.volume-slider {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  width: 100% !important;
+  height: 3px !important;
+  border-radius: 2px !important;
+  background: #C0C5CC !important;
+  outline: none !important;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  width: 10px !important;
+  height: 10px !important;
+  border-radius: 50% !important;
+  background: #172A46 !important;
+  cursor: pointer !important;
 }
