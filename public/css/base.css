@@ -1,18 +1,21 @@
 
   #flower-bottom-left{
     position: absolute;
-    width: 22%;
-    left: -7%;
+    width: 16%;/*22%*/
+    left: -2%;
     bottom: -13%;
-    max-height: 473px;
+    max-height: 427px;/*451px;*//*473px;*/
+    max-width: 342px;/*241px;*/
+    /* height: 38%; */
   }
 
   #flower-top-left{
     position: absolute;
     top: 10px;
     width: 30%;
-    left: -13%;
+    left: -4%; /*-5%*/
     max-height: 226px;
+    max-width: 236px;
   }
 
   #flower-top-right{
@@ -21,6 +24,7 @@
     width: 30%;
     right: -4%;
     max-height: 273px;
+    max-width: 204px;
   }
 
   #imageContainer{
