@@ -11,6 +11,13 @@
   max-width: 40%;
 }
 
+
+.timeline-history-icon-circle:hover {
+  transform: scale(1.15);
+  background: var(--Primary);
+  color: var(--bg-navy);
+}
+
 @media (max-width: 767px) {
   .timeline-1 {
     max-width: 98%;
