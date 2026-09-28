@@ -36,10 +36,13 @@ function holdScrollAtSectionStart(event) {
 }
 
 function alignFinalContainer() {
-  const finalTop = finalContainer.getBoundingClientRect().top + window.scrollY;
-  if (Math.abs(window.scrollY - finalTop) > 1) {
-    window.scrollTo(0, finalTop);
-  }
+  const root = document.documentElement;
+  const previousScrollBehavior = root.style.scrollBehavior;
+  root.style.scrollBehavior = "auto";
+  window.scrollTo(0, 0);
+  window.requestAnimationFrame(() => {
+    root.style.scrollBehavior = previousScrollBehavior;
+  });
 }
 
 window.addEventListener("wheel", holdScrollAtSectionStart, { passive: false });
@@ -84,24 +87,19 @@ function updateEnvelopeFromScroll() {
     mainImage.src = images[frameIndex];
   }
 
-  if (progress >= 1) {
+  if (frameIndex === images.length - 1) {
     finished = true;
     scrollSettleActive = true;
     releaseScrollSettle(500);
     scrollTrack.classList.add("is-open");
     showFinalContainer();
-    window.requestAnimationFrame(() => {
-      alignFinalContainer();
-      window.requestAnimationFrame(alignFinalContainer);
-    });
-    setTimeout(alignFinalContainer, 100);
+    window.requestAnimationFrame(alignFinalContainer);
   }
 }
 
 window.addEventListener("scroll", () => {
   if (scrollSettleActive) {
     releaseScrollSettle();
-    alignFinalContainer();
     return;
   }
   if (scrollUpdatePending || finished) return;
