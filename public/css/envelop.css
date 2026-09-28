@@ -60,7 +60,6 @@
 .envelope-scroll-track {
   position: relative;
   height: 200vh;
-  height: 200dvh;
 }
 
 .envelope-scroll-track.is-open {

@@ -38,12 +38,11 @@ function holdScrollAtSectionStart(event) {
 function alignFinalContainer() {
   const finalTop = finalContainer.getBoundingClientRect().top + window.scrollY;
   if (Math.abs(window.scrollY - finalTop) > 1) {
-    window.scrollTo({ top: finalTop, behavior: "auto" });
+    window.scrollTo(0, finalTop);
   }
 }
 
 window.addEventListener("wheel", holdScrollAtSectionStart, { passive: false });
-window.addEventListener("touchmove", holdScrollAtSectionStart, { passive: false });
 window.addEventListener("keydown", (event) => {
   if (!scrollSettleActive || !["ArrowDown", "PageDown", " ", "End"].includes(event.key)) return;
   event.preventDefault();
@@ -89,9 +88,13 @@ function updateEnvelopeFromScroll() {
     finished = true;
     scrollSettleActive = true;
     releaseScrollSettle(500);
-    showFinalContainer();
     scrollTrack.classList.add("is-open");
-    window.requestAnimationFrame(alignFinalContainer);
+    showFinalContainer();
+    window.requestAnimationFrame(() => {
+      alignFinalContainer();
+      window.requestAnimationFrame(alignFinalContainer);
+    });
+    setTimeout(alignFinalContainer, 100);
   }
 }
 
