@@ -5,6 +5,30 @@
   cursor: pointer;
 }
 
+#imageContainer #mainImage.fade-out {
+  animation: envelopeClose 0.22s ease-in forwards;
+}
+
+#imageContainer #mainImage.fade-in {
+  animation: envelopeOpen 0.13s ease-out both;
+}
+
+.welcome-text.animate__fadeOut,
+#finalContainer.animate__fadeIn,
+#imageContainer.animate__fadeOut,
+#main-text-container.animate__fadeIn {
+  animation-duration: 0.5s;
+}
+
+@keyframes envelopeClose {
+  to { opacity: 0; transform: scale(0.96); }
+}
+
+@keyframes envelopeOpen {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 
 /* Animación del contenedor final */
 
@@ -45,3 +69,9 @@
   transform: translateZ(-1000px) scale(0.5);
 }
 
+@media (min-width: 992px) {
+  #imageContainer #mainImage {
+    max-width: 40vw;
+    max-height: 62vh;
+  }
+}

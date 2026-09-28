@@ -1,4 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const elementos = document.querySelectorAll(".reveal");
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    elementos.forEach(el => el.classList.add("visible"));
+    return;
+  }
+
   const observerOptions = {
     root: null, // Usa el viewport del navegador
     threshold: 0.15 // Se activa cuando el 15% del elemento es visible
@@ -15,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }, observerOptions);
 
   // Selecciona todos los elementos con la clase .reveal
-  const elementos = document.querySelectorAll(".reveal");
   elementos.forEach(el => observer.observe(el));
 });
 
