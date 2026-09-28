@@ -38,6 +38,7 @@
     <title>Mi boda</title>
   </head>
   <body>
+    <div id="envelopeScrollTrack" class="envelope-scroll-track">
     <div id="scene" class="scene">
 
         <div class="container-xxl px-0 image-container" id="imageContainer">
@@ -49,11 +50,22 @@
 
                 <img
                     id="mainImage"
-                    src="./public/images/env_start_sequence.png"
+                    src="./public/images/env_1_sequence.png"
                     alt="Imagen"
                     class="img-fluid animate__animated animate__bounceIn  animate__slower mb-5"
                     
                 />
+
+                <div id="scrollPrompt" class="envelope-scroll-prompt" aria-label="Desliza para abrir el sobre">
+                    <svg class="envelope-scroll-arrow" viewBox="0 0 20 18" aria-hidden="true">
+                        <path d="M10 16V3M4 9l6-6 6 6" />
+                    </svg>
+                    <svg class="envelope-scroll-icon" viewBox="0 0 24 34" aria-hidden="true">
+                        <rect x="4" y="2" width="16" height="29" rx="8" />
+                        <path class="envelope-scroll-wheel" d="M12 8v6" />
+                    </svg>
+                    <span>Desliza para abrir</span>
+                </div>
 
                 <img
                     id="flower-top-left"
@@ -80,6 +92,8 @@
                 />
             </div>
         </div>
+    </div>
+    </div>
 
         <div id="finalContainer"class="container-xxl px-0 w-100 d-flex justify-content-center align-items-center flex-column finalContainer d-none full-border">
             <div id="top-container" class="d-flex justify-content-center align-items-center" style="background-color: #0c1826;position: relative;overflow: hidden;">
@@ -947,10 +961,6 @@
 
 
         </div>
-
-    </div>
-
-
 
     <!-- WIDGET DE AUDIO (Palo directo en body para evitar conflictos de scroll) -->
   <!-- Widget Flotante de Audio (Plegable) -->
