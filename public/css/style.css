@@ -15,14 +15,21 @@
     --Silver:#C0C5CC; 
 }
 
+/* Reserva la proporción intrínseca sin alterar las reglas de cada sección. */
+:where(img[width][height]) {
+    height: auto;
+}
+
 @font-face {
     font-family: GreatVibes;
     src: url('../fonts/GreatVibes-Regular.ttf');
+    font-display: swap;
 }
 
 @font-face {
     font-family: Lora;
     src: url('../fonts/Lora-VariableFont_wght.ttf');
+    font-display: swap;
 }
 
 html {
@@ -178,7 +185,8 @@ input::placeholder {
     border: solid white 17px;
 }
 
-#mainImage{
+#mainImage,
+#heroImage{
     max-width: 70%; 
     max-height: 70%; 
     object-fit: contain;
@@ -301,7 +309,8 @@ html::-webkit-scrollbar {
         max-width: 1224px;
     }
 
-    #mainImage{
+    #mainImage,
+    #heroImage{
         max-width: 40%; 
         max-height: 40%; 
         object-fit: contain;
@@ -532,7 +541,8 @@ html::-webkit-scrollbar {
         width: 60%;
     } */
 
-    #mainImage{
+    #mainImage,
+    #heroImage{
         width: 60%;
     }
 
@@ -546,4 +556,3 @@ html::-webkit-scrollbar {
     }
     
 }
-

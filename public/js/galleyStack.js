@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
   let isAnimating = false;
   let isDragging = false;
   let startX = 0;
+  let startY = 0;
+  let dragAxis = null;
   let currentX = 0;
   let activePointerType = null; // Previene doble disparo (touch vs mouse)
 
@@ -29,22 +31,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- NAVEGACIÓN TÁCTIL MÓVIL (TOUCH) ---
   container.addEventListener("touchstart", (e) => {
-    if (isAnimating) return;
+    if (isAnimating || e.touches.length !== 1) return;
     const topCard = getTopCard();
     if (e.target !== topCard && !topCard.contains(e.target)) return;
 
     activePointerType = "touch";
     isDragging = true;
     startX = e.touches[0].clientX;
+    startY = e.touches[0].clientY;
+    dragAxis = null;
     currentX = 0;
     
     topCard.style.transition = "none";
-  }, { passive: false });
+  }, { passive: true });
 
   window.addEventListener("touchmove", (e) => {
     if (!isDragging || activePointerType !== "touch") return;
 
-    // Cancela el scroll de la página por completo
+    if (e.touches.length !== 1) {
+      cancelDrag();
+      return;
+    }
+    const dx = e.touches[0].clientX - startX;
+    const dy = e.touches[0].clientY - startY;
+    if (!dragAxis) {
+      if (Math.max(Math.abs(dx), Math.abs(dy)) < 8) return;
+      dragAxis = Math.abs(dx) > Math.abs(dy) ? "horizontal" : "vertical";
+    }
+    if (dragAxis === "vertical") {
+      cancelDrag();
+      return;
+    }
+
+    // Solo el gesto horizontal controla las fotos.
     if (e.cancelable) e.preventDefault();
 
     const topCard = getTopCard();
@@ -58,6 +77,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!isDragging || activePointerType !== "touch") return;
     handleDragEnd();
   });
+
+  function cancelDrag() {
+    if (!isDragging) return;
+    currentX = 0;
+    handleDragEnd();
+  }
+  window.addEventListener("touchcancel", cancelDrag);
+  window.addEventListener("pointercancel", cancelDrag);
 
   // --- NAVEGACIÓN DE RATÓN (DESKTOP) ---
   function onPointerDown(e) {
