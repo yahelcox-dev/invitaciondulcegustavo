@@ -14,6 +14,12 @@ const images = [
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const scrollTrack = document.getElementById("envelopeScrollTrack");
 const scrollPrompt = document.getElementById("scrollPrompt");
+const envelopePromptText = document.getElementById("envelopePromptText");
+const envelopeLoadingStatus = document.getElementById("envelopeLoadingStatus");
+
+// El botón conserva acceso con Enter/Espacio; la imagen también acepta un toque.
+scrollPrompt.addEventListener("click", startEnvelopeOpening);
+mainImage.addEventListener("click", startEnvelopeOpening);
 
 let started = false;
 let finished = false;
@@ -106,23 +112,42 @@ async function startEnvelopeOpening() {
   if (started || finished) return;
   started = true;
   scrollSettleActive = true;
-  hideWelcomeText();
-  scrollPrompt.classList.add("is-hidden");
+  scrollPrompt.disabled = true;
+  scrollPrompt.setAttribute("aria-busy", "true");
 
   if (!prefersReducedMotion) {
-    // Decodificar antes de cambiar el src evita saltos en conexiones lentas.
+    // Mostrar el estado solo si la preparación no termina de inmediato.
+    const loadingTimer = setTimeout(() => {
+      envelopePromptText.textContent = "Abriendo tu invitación…";
+      envelopeLoadingStatus.textContent = "Abriendo tu invitación…";
+      imageContainer.classList.add("is-loading");
+    }, 150);
     const frames = images.map((src) => {
       const frame = new Image();
       frame.src = src;
       return frame.decode().then(() => src).catch(() => null);
     });
-    const readyFrames = await Promise.all(frames);
+    let timeout;
+    const readyFrames = await Promise.race([
+      Promise.all(frames),
+      new Promise(resolve => { timeout = setTimeout(() => resolve([]), 5000); }),
+    ]);
+    clearTimeout(timeout);
+    clearTimeout(loadingTimer);
+    imageContainer.classList.remove("is-loading");
+    hideWelcomeText();
+    scrollPrompt.classList.add("is-hidden");
     for (const src of readyFrames) {
       if (!src) continue;
       mainImage.src = src;
       await new Promise(resolve => setTimeout(resolve, 180));
     }
+  } else {
+    hideWelcomeText();
+    scrollPrompt.classList.add("is-hidden");
   }
+  scrollPrompt.removeAttribute("aria-busy");
+  envelopeLoadingStatus.textContent = "";
 
   finished = true;
   scrollTrack.classList.add("is-open");
@@ -140,7 +165,7 @@ window.addEventListener("scroll", () => {
     if (finished && !touchInProgress) releaseScrollSettle();
     return;
   }
-  // Solo wheel, gesto táctil o teclado pueden iniciar la animación.
+  // Solo una interacción explícita puede iniciar la animación.
   // Un scroll restaurado por el navegador vuelve a la portada sin abrirla.
   if (!started && window.scrollY > 0) alignFinalContainer();
 }, { passive: true });
