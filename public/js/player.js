@@ -1,23 +1,8 @@
+// Se conserva el nombre usado por la apertura del sobre: solo muestra el control.
 window.playWeddingMusic = function() {
-const container = document.querySelector("#audioWidget");
-container.classList.remove("d-none");
-container.classList.add("animate__animated")
-container.classList.add("animate__fadeInRight")
-container.classList.add("d-flex")
-
-
-  const audio = document.getElementById("weddingAudio");
-  const icon = document.getElementById("audioIcon");
-  const wave = document.getElementById("soundWave");
-
-  if (audio && audio.paused) {
-    audio.play().then(() => {
-      icon.className = "bi bi-pause-fill";
-      wave.classList.add("playing");
-    }).catch(err => {
-      console.log("Autoplay restringido por el navegador:", err);
-    });
-  }
+  const container = document.querySelector("#audioWidget");
+  container.classList.remove("d-none");
+  container.classList.add("animate__animated", "animate__fadeInRight", "d-flex");
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -39,6 +24,15 @@ document.addEventListener("DOMContentLoaded", () => {
     e.stopPropagation();
     if (audio.paused) {
       try {
+        // No se asigna ninguna URL de audio hasta la primera pulsación.
+        const pendingSources = audio.querySelectorAll("source[data-src]");
+        if (pendingSources.length) {
+          pendingSources.forEach(source => {
+            source.src = source.dataset.src;
+            delete source.dataset.src;
+          });
+          audio.load();
+        }
         await audio.play();
       } catch (err) {
         syncPlaybackState();
