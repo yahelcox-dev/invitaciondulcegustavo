@@ -28,6 +28,55 @@ let scrollSettleActive = false;
 let touchInProgress = false;
 let scrollSettleTimer;
 
+const initialLoader = document.getElementById("envelopeInitialLoader");
+initialLoader.addEventListener("click", startEnvelopeOpening);
+
+// El indicador ocupa visualmente el espacio reservado por la imagen, sin moverla.
+function positionInitialLoader() {
+  initialLoader.style.left = `${mainImage.offsetLeft + mainImage.offsetWidth / 2}px`;
+  initialLoader.style.top = `${mainImage.offsetTop + mainImage.offsetHeight * 0.65}px`;
+}
+const initialResizeObserver = new ResizeObserver(positionInitialLoader);
+initialResizeObserver.observe(mainImage);
+window.addEventListener("resize", positionInitialLoader);
+positionInitialLoader();
+
+async function prepareInitialEnvelope() {
+  let timeout;
+  const decoded = await Promise.race([
+    mainImage.decode().then(() => true).catch(() => false),
+    new Promise(resolve => { timeout = setTimeout(() => resolve(false), 8000); }),
+  ]);
+  clearTimeout(timeout);
+  initialLoader.hidden = true;
+  initialResizeObserver.disconnect();
+  window.removeEventListener("resize", positionInitialLoader);
+  if (decoded) {
+    mainImage.classList.remove("envelope-preparing");
+    if (!prefersReducedMotion) {
+      // La entrada comienza después de decodificar, nunca durante la descarga.
+      await new Promise(resolve => {
+        let animationTimeout;
+        const complete = () => {
+          clearTimeout(animationTimeout);
+          mainImage.removeEventListener("animationend", complete);
+          resolve();
+        };
+        mainImage.addEventListener("animationend", complete, { once: true });
+        mainImage.classList.add("animate__animated", "animate__bounceIn", "animate__slower");
+        animationTimeout = setTimeout(complete, 3200);
+      });
+      mainImage.classList.remove("animate__animated", "animate__bounceIn", "animate__slower");
+    }
+  } else {
+    envelopePromptText.textContent = "Toca para ver la invitación";
+    envelopeLoadingStatus.textContent = "No se pudo cargar el sobre. Puedes abrir la invitación.";
+  }
+  scrollPrompt.classList.remove("is-hidden");
+  return decoded;
+}
+const initialEnvelopeReady = prepareInitialEnvelope();
+
 // La restauración de scroll al recargar no representa un gesto de apertura.
 if ("scrollRestoration" in window.history) {
   window.history.scrollRestoration = "manual";
@@ -114,8 +163,10 @@ async function startEnvelopeOpening() {
   scrollSettleActive = true;
   scrollPrompt.disabled = true;
   scrollPrompt.setAttribute("aria-busy", "true");
+  // Una interacción durante la preparación queda pendiente y se ejecuta una vez.
+  const initialImageAvailable = await initialEnvelopeReady;
 
-  if (!prefersReducedMotion) {
+  if (!prefersReducedMotion && initialImageAvailable) {
     // Mostrar el estado solo si la preparación no termina de inmediato.
     const loadingTimer = setTimeout(() => {
       envelopePromptText.textContent = "Abriendo tu invitación…";

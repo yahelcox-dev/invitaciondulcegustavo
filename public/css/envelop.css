@@ -292,3 +292,51 @@
     object-fit: contain;
   }
 }
+
+/* Mantener las dimensiones evita saltos mientras llega el primer fotograma. */
+#imageContainer #mainImage.envelope-preparing { opacity: 0; animation: none; }
+.envelope-initial-loader {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: 65%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: min(260px, 80vw);
+  color: #C0C5CC;
+  font: 0.75rem Lora, serif;
+  text-align: center;
+  cursor: pointer;
+}
+.envelope-initial-loader[hidden] { display: none; }
+.envelope-loader-ring {
+  width: 26px;
+  height: 26px;
+  border: 2px solid rgba(192, 197, 204, 0.25);
+  border-top-color: #C0C5CC;
+  border-radius: 50%;
+  animation: envelopeLoaderSpin 0.9s linear infinite;
+}
+@keyframes envelopeLoaderSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .envelope-loader-ring { animation: none; }
+}
+
+/* Los puntos mantienen su espacio para que el texto no salte al animarse. */
+.envelope-loading-dots { display: inline-flex; width: 1.2em; }
+.envelope-loading-dots > span {
+  display: inline-block;
+  animation: envelopeLoadingDot 1.2s ease-in-out infinite;
+}
+.envelope-loading-dots > span:nth-child(2) { animation-delay: 0.2s; }
+.envelope-loading-dots > span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes envelopeLoadingDot {
+  0%, 60%, 100% { opacity: 0.35; transform: translateY(0); }
+  30% { opacity: 1; transform: translateY(-3px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .envelope-loading-dots > span { animation: none; }
+}
