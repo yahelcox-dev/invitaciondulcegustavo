@@ -1,0 +1,15 @@
+/* Bootstrap Icons 1.11.3, MIT. Véase LICENSE. Se conservan las clases del reproductor. */
+.bi::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  background-color: currentColor;
+  -webkit-mask: var(--audio-icon) center / contain no-repeat;
+  mask: var(--audio-icon) center / contain no-repeat;
+}
+.bi-play-fill { --audio-icon: url("play-fill.svg"); }
+.bi-pause-fill { --audio-icon: url("pause-fill.svg"); }
+.bi-volume-down-fill { --audio-icon: url("volume-down-fill.svg"); }
+.bi-chevron-right { --audio-icon: url("chevron-right.svg"); }
