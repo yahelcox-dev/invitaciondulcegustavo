@@ -21,9 +21,9 @@
   perspective: 1000px;
   cursor: grab;
   
-  /* Desactiva TODOS los gestos del navegador (Scroll vertical, horizontal y zoom) */
-  touch-action: none !important;
-  -ms-touch-action: none !important;
+  /* Conserva el scroll vertical y el zoom; el arrastre horizontal cambia de foto. */
+  touch-action: pan-y pinch-zoom !important;
+  -ms-touch-action: pan-y pinch-zoom !important;
   overscroll-behavior: none !important;
   user-select: none !important;
   -webkit-user-select: none !important;
@@ -44,9 +44,9 @@
   border: 1px solid rgba(192, 197, 204, 0.4);
   transform-origin: center bottom;
   
-  /* Forzado de anulación de gestos nativos en iOS y Android */
-  touch-action: none !important;
-  -ms-touch-action: none !important;
+  /* Permite los gestos verticales y el zoom también sobre las tarjetas. */
+  touch-action: pan-y pinch-zoom !important;
+  -ms-touch-action: pan-y pinch-zoom !important;
   overscroll-behavior: none !important;
   -webkit-user-drag: none !important;
   
