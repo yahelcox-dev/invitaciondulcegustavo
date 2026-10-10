@@ -13,7 +13,44 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentX = 0;
   let activePointerType = null; // Previene doble disparo (touch vs mouse)
 
+  let galleryIsNear = false;
+
+  function prepareCard(card) {
+    const image = card.querySelector("img");
+    if (image.dataset.src) {
+      image.loading = "eager";
+      image.src = image.dataset.src;
+      delete image.dataset.src;
+    }
+  }
+
+  // Conservar los JPEG originales como respaldo si una descarga WebP falla.
+  cards.forEach(card => {
+    const image = card.querySelector("img");
+    function useFallback() {
+      if (!image.dataset.fallback) return;
+      const fallback = image.dataset.fallback;
+      delete image.dataset.fallback;
+      image.src = fallback;
+    }
+    image.addEventListener("error", useFallback);
+    if (image.getAttribute("src") && image.complete && !image.naturalWidth) useFallback();
+  });
+
+  const galleryObserver = new IntersectionObserver(entries => {
+    if (!entries.some(entry => entry.isIntersecting)) return;
+    galleryIsNear = true;
+    prepareCard(cards[0]);
+    prepareCard(cards[1]);
+    galleryObserver.disconnect();
+  }, { rootMargin: "600px 0px" });
+  galleryObserver.observe(container);
+
   function updateStack() {
+    if (galleryIsNear) {
+      prepareCard(cards[0]);
+      prepareCard(cards[1]);
+    }
     cards.forEach((card, index) => {
       const zIndex = cards.length - index;
       const scale = 1 - index * 0.04;
@@ -127,7 +164,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Aplicar transición fluida acelerada por hardware
     topCard.style.transition = "transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.22s linear";
 
-    if (Math.abs(currentX) > threshold) {
+    prepareCard(cards[1]);
+    const nextImage = cards[1].querySelector("img");
+    // Si el invitado desliza más rápido que la red, conservar la foto actual.
+    if (Math.abs(currentX) > threshold && nextImage.complete && nextImage.naturalWidth > 0) {
       isAnimating = true;
       const direction = currentX > 0 ? "swiped-right" : "swiped-out";
       topCard.classList.add(direction);
