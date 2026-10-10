@@ -97,7 +97,11 @@
   white-space: nowrap;
   transform: translateX(-50%);
   transition: opacity 0.3s ease, visibility 0.3s ease;
-  pointer-events: none;
+  pointer-events: auto;
+  border: 0;
+  background: transparent;
+  padding: 6px 10px;
+  cursor: pointer;
 }
 
 .envelope-scroll-arrow {
@@ -246,5 +250,45 @@
   .envelope-scroll-arrow,
   .envelope-scroll-wheel {
     animation: none;
+  }
+}
+
+/* Controles de apertura sin alterar las dimensiones del sobre. */
+#imageContainer #mainImage { cursor: pointer; }
+.envelope-scroll-prompt:focus-visible {
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+}
+.envelope-scroll-prompt:disabled { cursor: wait; }
+#imageContainer.is-loading #mainImage {
+  animation: envelopeLoadingPulse 1.2s ease-in-out infinite;
+}
+#imageContainer.is-loading .envelope-scroll-arrow,
+#imageContainer.is-loading .envelope-scroll-icon { visibility: hidden; }
+@keyframes envelopeLoadingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.78; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #imageContainer.is-loading #mainImage { animation: none; }
+}
+
+/* Reserva espacio para el control de apertura en móviles de poca altura. */
+@media (max-width: 767.98px) and (max-height: 700px) {
+  #imageContainer > .vh-100 {
+    padding: 20px 24px 110px !important;
+  }
+  #imageContainer h1.welcome-text {
+    font-size: 34px !important;
+    line-height: 39px !important;
+    margin-bottom: 16px !important;
+  }
+  #imageContainer h5.welcome-text,
+  #imageContainer h6.welcome-text { margin-bottom: 12px !important; }
+  #imageContainer #mainImage {
+    max-height: max(80px, calc(100dvh - 330px));
+    width: auto;
+    margin-bottom: 0 !important;
+    object-fit: contain;
   }
 }
