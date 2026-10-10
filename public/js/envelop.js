@@ -20,12 +20,14 @@ let finished = false;
 let currentFrame = -1;
 let scrollUpdatePending = false;
 let scrollSettleActive = false;
+let touchInProgress = false;
 let scrollSettleTimer;
 
 function releaseScrollSettle(delay = 220) {
   clearTimeout(scrollSettleTimer);
   scrollSettleTimer = setTimeout(() => {
     scrollSettleActive = false;
+    if (finished) alignFinalContainer();
   }, delay);
 }
 
@@ -46,6 +48,21 @@ function alignFinalContainer() {
 }
 
 window.addEventListener("wheel", holdScrollAtSectionStart, { passive: false });
+window.addEventListener("touchstart", () => {
+  touchInProgress = true;
+}, { passive: true });
+window.addEventListener("touchmove", (event) => {
+  if (!scrollSettleActive) return;
+  if (event.cancelable) event.preventDefault();
+}, { passive: false });
+window.addEventListener("touchend", () => {
+  touchInProgress = false;
+  if (scrollSettleActive) releaseScrollSettle();
+}, { passive: true });
+window.addEventListener("touchcancel", () => {
+  touchInProgress = false;
+  if (scrollSettleActive) releaseScrollSettle();
+}, { passive: true });
 window.addEventListener("keydown", (event) => {
   if (!scrollSettleActive || !["ArrowDown", "PageDown", " ", "End"].includes(event.key)) return;
   event.preventDefault();
@@ -90,7 +107,11 @@ function updateEnvelopeFromScroll() {
   if (frameIndex === images.length - 1) {
     finished = true;
     scrollSettleActive = true;
-    releaseScrollSettle(500);
+    if (touchInProgress) {
+      clearTimeout(scrollSettleTimer);
+    } else {
+      releaseScrollSettle(500);
+    }
     scrollTrack.classList.add("is-open");
     showFinalContainer();
     window.requestAnimationFrame(alignFinalContainer);
@@ -99,7 +120,7 @@ function updateEnvelopeFromScroll() {
 
 window.addEventListener("scroll", () => {
   if (scrollSettleActive) {
-    releaseScrollSettle();
+    if (!touchInProgress) releaseScrollSettle();
     return;
   }
   if (scrollUpdatePending || finished) return;
