@@ -5,11 +5,11 @@ const mainTextContainer = document.getElementById("main-text-container");
 const welcomeText = document.querySelectorAll(".welcome-text");
 const scene = document.querySelector("#scene");
 const images = [
-  "./public/images/env_1_sequence.png?v=3",
-  "./public/images/env_2_sequence.png?v=3",
-  "./public/images/env_252_sequence.png?v=3",
-  "./public/images/env_293_sequence.png?v=3",
-  "./public/images/env3_sequence.png?v=3",
+  "./public/images/env_1_sequence.webp?v=1",
+  "./public/images/env_2_sequence.webp?v=1",
+  "./public/images/env_252_sequence.webp?v=1",
+  "./public/images/env_293_sequence.webp?v=1",
+  "./public/images/env3_sequence.webp?v=1",
 ];
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const scrollTrack = document.getElementById("envelopeScrollTrack");
