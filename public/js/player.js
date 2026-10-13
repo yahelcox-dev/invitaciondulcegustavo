@@ -1,10 +1,3 @@
-// Se conserva el nombre usado por la apertura del sobre: solo muestra el control.
-window.playWeddingMusic = function() {
-  const container = document.querySelector("#audioWidget");
-  container.classList.remove("d-none");
-  container.classList.add("animate__animated", "animate__fadeInRight", "d-flex");
-};
-
 document.addEventListener("DOMContentLoaded", () => {
   const audio = document.getElementById("weddingAudio");
   const widget = document.getElementById("audioWidget");
@@ -19,29 +12,34 @@ document.addEventListener("DOMContentLoaded", () => {
   audio.loop = true;
   audio.volume = volumeSlider.value;
 
-  // Alternar Reproducción / Pausa
-  async function toggleAudio(e) {
-    e.stopPropagation();
-    if (audio.paused) {
-      try {
-        // No se asigna ninguna URL de audio hasta la primera pulsación.
-        const pendingSources = audio.querySelectorAll("source[data-src]");
-        if (pendingSources.length) {
-          pendingSources.forEach(source => {
-            source.src = source.dataset.src;
-            delete source.dataset.src;
-          });
-          audio.load();
-        }
-        await audio.play();
-      } catch (err) {
-        syncPlaybackState();
+  // Preparar el audio una sola vez, al entrar en la segunda sección o al pulsar play.
+  async function startMusic() {
+    try {
+      const pendingSources = audio.querySelectorAll("source[data-src]");
+      if (pendingSources.length) {
+        pendingSources.forEach(source => {
+          source.src = source.dataset.src;
+          delete source.dataset.src;
+        });
+        audio.load();
       }
-    } else {
-      audio.pause();
-      icon.className = "bi bi-play-fill";
-      wave.classList.remove("playing");
+      await audio.play();
+    } catch (err) {
+      // Si el navegador bloquea el autoplay, mantener disponible el botón manual.
+      syncPlaybackState();
     }
+  }
+
+  window.playWeddingMusic = function() {
+    widget.classList.remove("d-none");
+    widget.classList.add("animate__animated", "animate__fadeInRight", "d-flex");
+    if (audio.paused) startMusic();
+  };
+
+  function toggleAudio(e) {
+    e.stopPropagation();
+    if (audio.paused) startMusic();
+    else audio.pause();
   }
 
   function syncPlaybackState() {

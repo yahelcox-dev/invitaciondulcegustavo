@@ -19,6 +19,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const image = card.querySelector("img");
     if (image.dataset.src) {
       image.loading = "eager";
+      if (image.dataset.srcset) {
+        image.srcset = image.dataset.srcset;
+        delete image.dataset.srcset;
+      }
       image.src = image.dataset.src;
       delete image.dataset.src;
     }
@@ -31,6 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!image.dataset.fallback) return;
       const fallback = image.dataset.fallback;
       delete image.dataset.fallback;
+      delete image.dataset.srcset;
+      image.removeAttribute("srcset");
       image.src = fallback;
     }
     image.addEventListener("error", useFallback);
