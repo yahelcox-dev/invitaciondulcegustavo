@@ -173,7 +173,12 @@ async function startEnvelopeOpening() {
       envelopeLoadingStatus.textContent = "Abriendo tu invitación…";
       imageContainer.classList.add("is-loading");
     }, 150);
-    const frames = images.map((src) => {
+    // Reutilizar la resolución elegida por el navegador, incluida la densidad de pantalla.
+    const selectedSize = mainImage.currentSrc.match(/-(320|480|640)\.webp(?:\?|$)/);
+    const frameSources = images.map(src => selectedSize
+      ? src.replace(".webp?v=1", `-${selectedSize[1]}.webp`)
+      : src);
+    const frames = frameSources.map((src) => {
       const frame = new Image();
       frame.src = src;
       return frame.decode().then(() => src).catch(() => null);
@@ -188,6 +193,8 @@ async function startEnvelopeOpening() {
     imageContainer.classList.remove("is-loading");
     hideWelcomeText();
     scrollPrompt.classList.add("is-hidden");
+    // Evitar que srcset mantenga el primer fotograma al cambiar src.
+    mainImage.removeAttribute("srcset");
     for (const src of readyFrames) {
       if (!src) continue;
       mainImage.src = src;
